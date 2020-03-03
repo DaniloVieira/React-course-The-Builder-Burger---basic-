@@ -5,13 +5,13 @@ import Button from '../../UI/Button/Button';
 
 class OrderSummary extends Component{
     
-    UNSAFE_componentWillUpdate(){
-        console.log('OderSummary will update');
-    }
+    // UNSAFE_componentWillUpdate(){
+    //     console.log('OderSummary will update');
+    // }
     
-    componentDidUpdate(){
-        console.log('OderSummary did update');
-    }
+    // componentDidUpdate(){
+    //     console.log('OderSummary did update');
+    // }
 
      render(){
         const ingredientSummary = Object.keys(this.props.ingredients)
