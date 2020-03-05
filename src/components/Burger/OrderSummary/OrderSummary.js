@@ -6,11 +6,11 @@ import Button from '../../UI/Button/Button';
 class OrderSummary extends Component{
     
     UNSAFE_componentWillUpdate(){
-        console.log('OderSummary will update');
+        //console.log('OderSummary will update');
     }
     
     componentDidUpdate(){
-        console.log('OderSummary did update');
+        //console.log('OderSummary did update');
     }
 
      render(){
