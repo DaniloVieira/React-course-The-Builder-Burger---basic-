@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 // import { createStore, combinedReducers } from 'redux'; // to use combined reducers
 
@@ -10,13 +10,12 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import burguerBuilderReducer from './store/reducers/burgerBuilder';
+import orderReducer from './store/reducers/order';
 
-// Eg. of combining reducers
-// const rootReducer = combinedReducers({
-//     ctr: counterReducer,
-//     res: resultReducer
-// })
-// const store = createStore(rootReducer);
+const rootReducer = combineReducers({
+    burgerBuiler: burguerBuilderReducer,
+    order: orderReducer
+})
 
 const logger = store => {
     return next => {
@@ -31,7 +30,7 @@ const logger = store => {
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(burguerBuilderReducer, composeEnhancers(
+const store = createStore(rootReducer, composeEnhancers(
     applyMiddleware(logger, thunk)));
 
 const app = (
