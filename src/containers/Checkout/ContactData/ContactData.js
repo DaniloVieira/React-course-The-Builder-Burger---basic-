@@ -93,14 +93,11 @@ class ContactData extends Component {
                 valid: true
             },
         },
-        // TODO moved to reducer
-        //loading: false,
-        formIsValid: false
+         formIsValid: false
     }
 
     orderHandler = (event) => {
         event.preventDefault();
-        // this.setState({loading: true});
         const formData = {};
         for(let formElId in this.state.orderForm){
             formData[formElId] = this.state.orderForm[formElId].value;
@@ -111,16 +108,7 @@ class ContactData extends Component {
             orderData: formData
         }
         this.props.onOrderBurguer(order);
-        //TODO moved to action creator
-        // axios.post('/orders.json', order)
-        //     .then(response => {
-        //         this.setState({loading: false});
-        //         this.props.history.push('/');
-        //     })
-        //     .catch(error => {
-        //         this.setState({loading: false});
-        //     });
-    }
+      }
 
     inputChangeHandler = (event, inputIdentifier) =>{
         const updatedForm = {...this.state.orderForm};

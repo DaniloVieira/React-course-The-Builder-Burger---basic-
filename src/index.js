@@ -11,6 +11,7 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import burguerBuilderReducer from './store/reducers/burgerBuilder';
 import orderReducer from './store/reducers/order';
+// import authReducer from './store/reducer/auth';
 
 const rootReducer = combineReducers({
     burgerBuiler: burguerBuilderReducer,
