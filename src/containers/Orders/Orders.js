@@ -15,7 +15,7 @@ class Orders extends Component {
     // }
 
     componentDidMount(){        
-        this.props.fetchOrders();
+        this.props.fetchOrders(this.props.token);
     }
     render(){
         let orders = <Spinner/>
@@ -38,14 +38,14 @@ class Orders extends Component {
 const mapStateToProps = (state) => {    
     return {
         orders: state.order.orders,
-        loading: state.order.loading
+        loading: state.order.loading,
+        token: state.auth.token
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchOrders: () => dispatch(actions.fetchOrders())
-        
+        fetchOrders: (token) => dispatch(actions.fetchOrders(token))
     }
 }
 
