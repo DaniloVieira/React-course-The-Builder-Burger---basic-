@@ -6,10 +6,11 @@ export const authStart = () => {
         type: actionTypes.AUTH_START
     };
 };
-export const authSuccess = (authData) => {
+export const authSuccess = (idToken, userId) => {
     return  {
         type: actionTypes.AUTH_SUCCESS,
-        authData: authData
+        idToken,
+        userId
     };
 };
 export const authFail = (error) => {
@@ -19,24 +20,41 @@ export const authFail = (error) => {
     };
 };
 
+export const logout = () => {
+    return  {
+        type: actionTypes.AUTH_LOGOUT        
+    };
+};
 
-export const auth = (email, password) => {
+export const checkAuthTimeout = (expirationTime) => {
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(logout());
+        }, expirationTime * 1000)
+    };
+};
+
+export const auth = (email, password, isSignup) => {
     return dispatch => {
         dispatch(authStart());
         const authData = {
             email: email,
             password: password,
             returnSecureToken: true
+        };
+        let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCao-5jKCbiWNrJBWeEbrkzuWF8ukuFJiY';
+        if(isSignup){
+            url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCao-5jKCbiWNrJBWeEbrkzuWF8ukuFJiY';
         }
-        console.log('[json]', authData);
-        axios.get('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCao-5jKCbiWNrJBWeEbrkzuWF8ukuFJiY', authData)
+        console.log('[URL]', url);
+        axios.post(url, authData)
             .then(response => {
-                console.log('[auth]', response);
-                dispatch(authSuccess(response.data));
+                dispatch(authSuccess(response.data.idToken, response.data.localId));
+                dispatch(checkAuthTimeout(response.data.expiresIn));
             })
-            .catch(error => {
-                console.log('[auth]', error)
-                dispatch(authFail(error));
+            .catch(err => {
+                console.log(err)
+                dispatch(authFail(err));
             });
         
     };
