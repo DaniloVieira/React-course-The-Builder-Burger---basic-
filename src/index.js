@@ -14,7 +14,7 @@ import orderReducer from './store/reducers/order';
 import authReducer from './store/reducers/auth';
 
 const rootReducer = combineReducers({
-    burgerBuiler: burguerBuilderReducer,
+    burgerBuilder: burguerBuilderReducer,
     order: orderReducer,
     auth: authReducer
 })
