@@ -13,7 +13,7 @@ import * as actions from '../../store/actions/index'; // index can be omitted
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 
 
-class BurgerBuilder extends Component {
+export class BurgerBuilder extends Component {
     
     state = {
          purchasing: false,
@@ -83,7 +83,8 @@ class BurgerBuilder extends Component {
             );
             orderSummary = <OrderSummary 
                 ingredients={this.props.ings}
-                price={this.props.price.toFixed(2)}
+                //price={this.props.price.toFixed(2)}
+                price={this.props.price}
                 purchaseCanceled={this.purchaseCanceledHandler}
                 purchaseContinue={this.purchaseContinueHandler}/>;
         }
